@@ -15,7 +15,7 @@ angular.module( "MediSport.controllers", [] )
     // Create the login modal that we will use later
     $ionicModal.fromTemplateUrl( "templates/login.html",
     {
-        scope: $scope;
+        scope: $scope
     } ).then( function( modal )
     {
         $scope.modal = modal;
