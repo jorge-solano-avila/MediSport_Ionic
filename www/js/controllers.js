@@ -1,4 +1,4 @@
-angular.module('starter.controllers', [])
+angular.module('MediSport.controllers', [])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
 
