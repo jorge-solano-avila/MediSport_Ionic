@@ -1,3 +1,3 @@
 #MediSport
 
-Mobile application for professionals in search of muscle injuries.
+Mobile application for search of professionals in muscle injuries.
