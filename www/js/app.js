@@ -48,10 +48,22 @@ angular.module( "MediSport", ["ionic", "MediSport.controllers"] )
         url: "/menu",
         abstract: true,
         templateUrl: "templates/menu.html",
-        controller: "AppCtrl"
+        controller: "Menu"
     } )
 
-    .state("menu.search",
+    .state("menu.searchGPS",
+    {
+        url: "/searchGPS",
+        views:
+        {
+            "menuContent":
+            {
+                templateUrl: "templates/searchGPS.html"
+            }
+        }
+    } )
+
+    .state( "menu.search",
     {
         url: "/search",
         views:
@@ -63,27 +75,15 @@ angular.module( "MediSport", ["ionic", "MediSport.controllers"] )
         }
     } )
 
-    .state( "menu.browse",
+    .state( "menu.account",
     {
-        url: "/browse",
+        url: "/account",
         views:
         {
             "menuContent":
             {
-                templateUrl: "templates/browse.html"
-            }
-        }
-    } )
-
-    .state( "menu.playlists",
-    {
-        url: "/playlists",
-        views:
-        {
-            "menuContent":
-            {
-                templateUrl: "templates/playlists.html",
-                controller: "PlaylistsCtrl"
+                templateUrl: "templates/account.html",
+                controller: "Account"
             }
         }
     } )
