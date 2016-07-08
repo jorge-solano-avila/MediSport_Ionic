@@ -29,15 +29,29 @@ angular.module( "MediSport", ["ionic", "MediSport.controllers"] )
 {
     $stateProvider
 
-    .state( "app",
+    .state( "login",
     {
-        url: "/app",
+        url: "/login",
+        templateUrl: "templates/login.html",
+        controller: "LogInCtrl"
+    } )
+
+    .state( "signup",
+    {
+        url: "/signup",
+        templateUrl: "templates/signup.html",
+        controller: "SignUpCtrl"
+    } )
+
+    .state( "menu",
+    {
+        url: "/menu",
         abstract: true,
         templateUrl: "templates/menu.html",
         controller: "AppCtrl"
     } )
 
-    .state("app.search",
+    .state("menu.search",
     {
         url: "/search",
         views:
@@ -49,7 +63,7 @@ angular.module( "MediSport", ["ionic", "MediSport.controllers"] )
         }
     } )
 
-    .state( "app.browse",
+    .state( "menu.browse",
     {
         url: "/browse",
         views:
@@ -61,7 +75,7 @@ angular.module( "MediSport", ["ionic", "MediSport.controllers"] )
         }
     } )
 
-    .state( "app.playlists",
+    .state( "menu.playlists",
     {
         url: "/playlists",
         views:
@@ -74,7 +88,7 @@ angular.module( "MediSport", ["ionic", "MediSport.controllers"] )
         }
     } )
 
-    .state( "app.single",
+    .state( "menu.single",
     {
         url: "/playlists/:playlistId",
         views:
@@ -87,5 +101,5 @@ angular.module( "MediSport", ["ionic", "MediSport.controllers"] )
         }
     } );
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise( "/app/playlists" );
+    $urlRouterProvider.otherwise( "/login" );
 } );
