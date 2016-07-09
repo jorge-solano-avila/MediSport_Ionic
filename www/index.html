@@ -12,6 +12,9 @@
 		<link href="css/ionic.app.css" rel="stylesheet">
 		-->
 
+		<!-- google maps -->
+    	<script type = "text/javascript" src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyC_HxU1JbQCZt2KfFW-xCz0SEZ5-F6Xa-Q&sensor=false"></script>
+
 		<!-- ionic/angularjs js -->
 		<script src = "lib/ionic/js/ionic.bundle.js"></script>
 
@@ -23,7 +26,14 @@
 		<script src = "js/controllers.js"></script>
 	</head>
 
-	<body ng-app = "MediSport">
-		<ion-nav-view></ion-nav-view>
+	<body ng-app = "MediSport" animation = "slide-left-right-ios7">
+		<div>
+		    <div>
+		        <ion-nav-bar class = "bar-stable">
+		            <ion-nav-back-button class = "button-icon icon ion-ios-arrow-back">Atrás</ion-nav-back-button>
+		        </ion-nav-bar>
+		        <ion-nav-view></ion-nav-view>
+		    </div>
+		</div>
 	</body>
 </html>

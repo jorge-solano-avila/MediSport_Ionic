@@ -29,15 +29,41 @@ angular.module( "MediSport", ["ionic", "MediSport.controllers"] )
 {
     $stateProvider
 
-    .state( "app",
+    .state( "login",
     {
-        url: "/app",
-        abstract: true,
-        templateUrl: "templates/menu.html",
-        controller: "AppCtrl"
+        url: "/login",
+        templateUrl: "templates/login.html",
+        controller: "LogInCtrl"
     } )
 
-    .state("app.search",
+    .state( "signup",
+    {
+        url: "/signup",
+        templateUrl: "templates/signup.html",
+        controller: "SignUpCtrl"
+    } )
+
+    .state( "menu",
+    {
+        url: "/menu",
+        abstract: true,
+        templateUrl: "templates/menu.html",
+        controller: "Menu"
+    } )
+
+    .state("menu.searchGPS",
+    {
+        url: "/searchGPS",
+        views:
+        {
+            "menuContent":
+            {
+                templateUrl: "templates/searchGPS.html"
+            }
+        }
+    } )
+
+    .state( "menu.search",
     {
         url: "/search",
         views:
@@ -49,43 +75,18 @@ angular.module( "MediSport", ["ionic", "MediSport.controllers"] )
         }
     } )
 
-    .state( "app.browse",
+    .state( "menu.account",
     {
-        url: "/browse",
+        url: "/account",
         views:
         {
             "menuContent":
             {
-                templateUrl: "templates/browse.html"
-            }
-        }
-    } )
-
-    .state( "app.playlists",
-    {
-        url: "/playlists",
-        views:
-        {
-            "menuContent":
-            {
-                templateUrl: "templates/playlists.html",
-                controller: "PlaylistsCtrl"
-            }
-        }
-    } )
-
-    .state( "app.single",
-    {
-        url: "/playlists/:playlistId",
-        views:
-        {
-            "menuContent":
-            {
-                templateUrl: "templates/playlist.html",
-                controller: "PlaylistCtrl"
+                templateUrl: "templates/account.html",
+                controller: "Account"
             }
         }
     } );
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise( "/app/playlists" );
+    $urlRouterProvider.otherwise( "/login" );
 } );
