@@ -14,41 +14,37 @@ angular.module( "MediSport.controllers", [] )
 
 .controller( "Map", function( $scope, $ionicLoading )
 {
-    console.log( "Not initialize" );
     google.maps.event.addDomListener( window, "load", initialize() );
 
     function initialize()
     {
-        console.log( "Initialize" );
         var mapOptions =
         {
-            center: { lat: 28.271834, lng: -16.642405 },
-            zoom: 10,
+            center: { lat: 4.6486259, lng: -74.2478955 },
+            zoom: 15,
             mapTypeId: google.maps.MapTypeId.ROADMAP,
-            mapTypeControlOptions:
-            {
-                mapTypeIds: []
-            },
-            panControl: false,
-            streetViewControl: false,
             zoomControlOptions:
             {
                 style: google.maps.ZoomControlStyle.SMALL
             }
         };
 
+        var map = new google.maps.Map( document.getElementById( "map" ), mapOptions );
+
         navigator.geolocation.getCurrentPosition( function( pos )
         {
-            map.setCenter( new google.maps.LatLng( pos.coords.latitude, pos.coords.longitude ) );
+            var latitude = pos.coords.latitude;
+            var longitude = pos.coords.longitude;
+            var position = new google.maps.LatLng( latitude, longitude );
+            map.setCenter( position );
             var myLocation = new google.maps.Marker(
             {
-                position: new google.maps.LatLng( pos.coords.latitude, pos.coords.longitude ),
+                position: position,
                 map: map,
                 title: "My Location"
             } );
         } );
 
-        var map = new google.maps.Map( document.getElementById( "map" ), mapOptions );
         $scope.map = map;
     }
 } )
