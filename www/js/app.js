@@ -51,7 +51,7 @@ angular.module( "MediSport", ["ionic", "MediSport.controllers"] )
         controller: "Menu"
     } )
 
-    .state("menu.searchGPS",
+    .state( "menu.searchGPS",
     {
         url: "/searchGPS",
         views:
