@@ -1,18 +1,20 @@
-angular.module( "MediSport.controllers", [] )
+angular.module( "MediSport" )
 
-.controller( "LogInCtrl", function( $scope )
+.controller( "LogIn", function( $rootScope, $scope )
 {
+    $rootScope.test = "TEST";
 } )
 
-.controller( "SignUpCtrl", function( $scope )
+.controller( "SignUp", function( $scope )
 {
 } )
 
 .controller( "Menu", function( $scope )
 {
+
 } )
 
-.controller( "Map", function( $scope, $ionicLoading )
+.controller( "Map", function( $rootScope, $scope )
 {
     google.maps.event.addDomListener( window, "load", initialize() );
 
@@ -47,6 +49,11 @@ angular.module( "MediSport.controllers", [] )
 
         $scope.map = map;
     }
+} )
+
+.controller( "Search", function( $scope )
+{
+
 } )
 
 .controller( "Account", function( $scope )

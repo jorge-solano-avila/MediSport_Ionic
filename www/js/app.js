@@ -4,7 +4,7 @@
 // "starter" is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of "requires"
 // "starter.controllers" is found in controllers.js
-angular.module( "MediSport", ["ionic", "MediSport.controllers"] )
+angular.module( "MediSport", ["ionic"] )
 
 .run( function( $ionicPlatform )
 {
@@ -33,14 +33,14 @@ angular.module( "MediSport", ["ionic", "MediSport.controllers"] )
     {
         url: "/login",
         templateUrl: "templates/login.html",
-        controller: "LogInCtrl"
+        controller: "LogIn"
     } )
 
     .state( "signup",
     {
         url: "/signup",
         templateUrl: "templates/signup.html",
-        controller: "SignUpCtrl"
+        controller: "SignUp"
     } )
 
     .state( "menu",
@@ -58,7 +58,8 @@ angular.module( "MediSport", ["ionic", "MediSport.controllers"] )
         {
             "menuContent":
             {
-                templateUrl: "templates/searchGPS.html"
+                templateUrl: "templates/searchGPS.html",
+                controller: "Map"
             }
         }
     } )
@@ -70,7 +71,8 @@ angular.module( "MediSport", ["ionic", "MediSport.controllers"] )
         {
             "menuContent":
             {
-                templateUrl: "templates/search.html"
+                templateUrl: "templates/search.html",
+                controller: "Search"
             }
         }
     } )
