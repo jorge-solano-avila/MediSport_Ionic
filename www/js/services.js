@@ -32,7 +32,16 @@ angular.module( "MediSport" )
         {
             if( error )
             {
+                var alertPopup = $ionicPopup.alert
+                ( {
+                    title: "Datos incompletos",
+                    template: "Por favor ingresa todos los campos requeridos"
+                } );
 
+                alertPopup.then( function( res )
+                {
+                    console.log( "Confirmation alert" );
+                } );
             }
         } );
     };
