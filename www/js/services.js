@@ -1,5 +1,3 @@
-var User = require( "mongoosedb" ).User;
-
 angular.module( "MediSport" )
 
 .service( "DataBaseCenter", function()
@@ -26,12 +24,16 @@ angular.module( "MediSport" )
 
     this.add = function( newUser )
     {
+        /*
         var user = new User( newUser );
 
         user.save( function( error )
         {
             if( error )
             {
+                console.log( typeof error );
+                console.log( Object.toType( error ) );
+                console.log( error );
                 var alertPopup = $ionicPopup.alert
                 ( {
                     title: "Datos incompletos",
@@ -43,7 +45,7 @@ angular.module( "MediSport" )
                     console.log( "Confirmation alert" );
                 } );
             }
-        } );
+        } );*/
     };
 
     this.delete = function( id )
@@ -58,6 +60,6 @@ angular.module( "MediSport" )
 
     this.get = function( username )
     {
-
+        
     };
 } );
