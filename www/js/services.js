@@ -20,7 +20,7 @@ angular.module( "MediSport" )
 
 .service( "DataBaseUser", function( $rootScope, $http, PopUps )
 {
-    this.server = "http://apimedisport.com";
+    this.server = "http://apimedisport.herokuapp.com";
 
     this.add = function( newUser )
     {
