@@ -20,11 +20,11 @@ angular.module( "MediSport" )
 
 .service( "DataBaseUser", function( $rootScope, $http, PopUps )
 {
-    this.user = {};
+    this.server = "http://localhost:8000";
 
     this.add = function( newUser )
     {
-
+        return $http.post( this.server + "/newUser", newUser );
     };
 
     this.delete = function( id )
@@ -39,24 +39,11 @@ angular.module( "MediSport" )
 
     this.get = function( username, password )
     {
-        return $http.post( "http://localhost:8000/users",
+        return $http.post( this.server + "/user",
         {
             username: username,
             password: password
         } );
-        /*
-        .success( function( data )
-        {
-            console.log( data );
-            if( data === "Error" )
-                PopUps.incorrectPassword();
-            else
-                return data;
-        } )
-        .error( function( error )
-        {
-            PopUps.newUser();
-        } );*/
     };
 } )
 
@@ -90,6 +77,20 @@ angular.module( "MediSport" )
         } );
     };
 
+    this.incorrectNewPassword = function()
+    {
+        var alertPopup = $ionicPopup.alert
+        ( {
+            title: "Contraseñas no coinciden",
+            template: "Por favor revisa tu contraseña."
+        } );
+
+        alertPopup.then( function( response )
+        {
+            console.log( "incorrect password" );
+        } );
+    };
+
     this.newUser = function()
     {
         var confirmPopup = $ionicPopup.confirm
@@ -102,6 +103,34 @@ angular.module( "MediSport" )
         {
             if( response )
                 $state.go( "signup" );
+        } );
+    };
+
+    this.newUserIncorrect = function()
+    {
+        var alertPopup = $ionicPopup.alert
+        ( {
+            title: "Datos incorrectos",
+            template: "Por favor revisa los datos ingresados."
+        } );
+
+        alertPopup.then( function( response )
+        {
+            console.log( "incorrect dates" );
+        } );
+    };
+
+    this.welcome = function()
+    {
+        var alertPopup = $ionicPopup.alert
+        ( {
+            title: "Bienvenido",
+            template: "Bienvenido a MediSport."
+        } );
+
+        alertPopup.then( function( response )
+        {
+            $state.go( "menu.searchGPS" );
         } );
     };
 } );

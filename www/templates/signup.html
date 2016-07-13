@@ -1,21 +1,25 @@
-<ion-view title = "Registro">
+<ion-view title = "Registro" ng-controller = "SignUp">
     <ion-content padding = "true" class = "has-header">
         <form id = "signup-form2" class = "list ">
-            <ion-list id = "signup-list2" class = " ">
-                <label class = "item item-input " id = "signup-input3">
+            <ion-list id = "signup-list2">
+                <label class = "item item-input">
                     <span class = "input-label">Nombre</span>
-                    <input type = "text" placeholder = "">
+                    <input type = "text" ng-model = "userVerify.name">
                 </label>
-                <label class = "item item-input " id = "signup-input4">
+                <label class = "item item-input">
                     <span class = "input-label">Usuario</span>
-                    <input type = "text" placeholder = "">
+                    <input type = "text" ng-model = "userVerify.username">
                 </label>
-                <label class = "item item-input " id = "signup-input5">
+                <label class = "item item-input">
                     <span class = "input-label">Contraseña</span>
-                    <input type = "text" placeholder = "">
+                    <input type = "password" ng-model = "userVerify.password">
+                </label>
+                <label class = "item item-input">
+                    <span class = "input-label">Repita la contraseña</span>
+                    <input type = "password" ng-model = "userVerify.passwordAux">
                 </label>
             </ion-list>
-            <button id = "signup-button3" class = " button button-stable  button-block ">Regístrate</button>
+            <button ng-click = "addUser()" class="button button-block button-positive">Regístrate</button>
         </form>
     </ion-content>
 </ion-view>

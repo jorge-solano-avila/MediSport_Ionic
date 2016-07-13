@@ -28,9 +28,33 @@ angular.module( "MediSport" )
     };
 } )
 
-.controller( "SignUp", function( $scope, PopUps )
+.controller( "SignUp", function( $scope, $rootScope, $state, DataBaseUser, PopUps )
 {
+    $scope.userVerify = {};
 
+    $scope.addUser = function()
+    {
+        $rootScope.user = $scope.userVerify;
+        if( $scope.userVerify.password === $scope.userVerify.passwordAux )
+        {
+            DataBaseUser.add
+            ( {
+                name: $scope.userVerify.name,
+                username: $scope.userVerify.username,
+                password: $scope.userVerify.password
+            } )
+            .then( function( response )
+            {
+                PopUps.welcome();
+                $scope.userVerify = {};
+            }, function( error )
+            {
+                PopUps.newUserIncorrect();
+            } );
+        }
+        else
+            PopUps.incorrectNewPassword();
+    };
 } )
 
 .controller( "Menu", function( $scope, PopUps )
