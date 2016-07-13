@@ -10,16 +10,20 @@ angular.module( "MediSport" )
         DataBaseUser.get( $scope.userVerify.username, $scope.userVerify.password )
         .then( function( response )
         {
-            if( response.data === "Error" )
+            if( response.data === "Password incorrect" )
                 PopUps.incorrectPassword();
+            else if( response.data === "Username incorrect" )
+                PopUps.newUser();
             else
             {
                 $rootScope.user = response.data;
                 $state.go( "menu.searchGPS" );
             }
+            $scope.userVerify = {};
         }, function( error )
         {
             PopUps.newUser();
+            $scope.userVerify = {};
         } );
     };
 } )

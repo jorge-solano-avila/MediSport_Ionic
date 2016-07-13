@@ -60,7 +60,7 @@ angular.module( "MediSport" )
     };
 } )
 
-.service( "PopUps", function( $rootScope, $ionicPopup )
+.service( "PopUps", function( $rootScope, $ionicPopup, $state )
 {
     this.connectionAlert = function()
     {
@@ -101,9 +101,7 @@ angular.module( "MediSport" )
         confirmPopup.then( function( response )
         {
             if( response )
-                console.log( 'You are sure' );
-            else
-                console.log( 'You are not sure' );
+                $state.go( "signup" );
         } );
     };
 } );
