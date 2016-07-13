@@ -1,6 +1,11 @@
 <ion-view view-title = "Búsqueda por GPS" ng-controller = "Map">
     <ion-content scroll = "true">
         <div id = "map" class = "map" data-tap-disabled = "true"></div>
+        <div class = "item range range-positive">
+            <input type = "range" ng-model = "search.value" name = "volume" min = "1" max = "100000" value = "serch.value">
+            <i class="icon ion-pinpoint"></i>
+        </div>
+        {{ search.value }}
         <button class = "button ion-android-search button-block button-positive" style = "width: 90%;margin: 0 auto;" ng-click = "find()">
             Buscar
         </button>

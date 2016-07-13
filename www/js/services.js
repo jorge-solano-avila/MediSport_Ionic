@@ -2,7 +2,8 @@ angular.module( "MediSport" )
 
 .service( "DataBaseCenter", function( $http )
 {
-    this.server = "http://apimedisport.herokuapp.com";
+    //this.server = "http://apimedisport.herokuapp.com";
+    this.server = "http://localhost:8000";
 
     this.add = function( newCenter )
     {
@@ -18,11 +19,22 @@ angular.module( "MediSport" )
     {
         return $http.get( this.server + "/centers" );
     };
+
+    this.getNearby = function( latitude, longitude, value )
+    {
+        return $http.post( this.server + "/centers",
+        {
+            latitude: latitude,
+            longitude: longitude,
+            value: value
+        } );
+    };
 } )
 
 .service( "DataBaseUser", function( $rootScope, $http, PopUps )
 {
-    this.server = "http://apimedisport.herokuapp.com";
+    //this.server = "http://apimedisport.herokuapp.com";
+    this.server = "http://localhost:8000";
 
     this.add = function( newUser )
     {

@@ -64,6 +64,8 @@ angular.module( "MediSport" )
 
 .controller( "Map", function( $rootScope, $scope, DataBaseCenter, PopUps )
 {
+    $scope.search = {};
+    $scope.search.value = 2000;
     $scope.latitude = "";
     $scope.longitude = "";
     $scope.ubications = [];
@@ -87,9 +89,9 @@ angular.module( "MediSport" )
 
         navigator.geolocation.getCurrentPosition( function( pos )
         {
-            $scope.latitud = pos.coords.latitude;
+            $scope.latitude = pos.coords.latitude;
             $scope.longitude = pos.coords.longitude;
-            var position = new google.maps.LatLng( $scope.latitud, $scope.longitude );
+            var position = new google.maps.LatLng( $scope.latitude, $scope.longitude );
             map.setCenter( position );
             var myLocation = new google.maps.Marker(
             {
@@ -104,8 +106,7 @@ angular.module( "MediSport" )
 
     $scope.find = function()
     {
-        console.log( "FIND" );
-        DataBaseCenter.getAll()
+        DataBaseCenter.getNearby( $scope.latitude, $scope.longitude, $scope.search.value )
         .then( function( response )
         {
             $scope.ubications = response.data;
