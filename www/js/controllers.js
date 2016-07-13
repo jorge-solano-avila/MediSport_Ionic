@@ -1,16 +1,26 @@
 angular.module( "MediSport" )
 
-.controller( "LogIn", function( $rootScope, $scope, DataBaseUser, PopUps )
+.controller( "LogIn", function( $rootScope, $scope, $state, DataBaseUser, PopUps )
 {
+    $scope.userVerify = {};
     $rootScope.user = {};
-    $scope.username = "";
-    $scope.password = "";
 
     $scope.verify = function()
     {
-        console.log( "VERIFIY" );
-        DataBaseUser.getAll();
-        //$rootScope.user = DataBaseUser.get( $scope.username );
+        DataBaseUser.get( $scope.userVerify.username, $scope.userVerify.password )
+        .then( function( response )
+        {
+            if( response.data === "Error" )
+                PopUps.incorrectPassword();
+            else
+            {
+                $rootScope.user = response.data;
+                $state.go( "menu.searchGPS" );
+            }
+        }, function( error )
+        {
+            PopUps.newUser();
+        } );
     };
 } )
 

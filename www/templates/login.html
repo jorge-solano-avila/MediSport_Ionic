@@ -4,12 +4,14 @@
             <ion-list>
                 <label class = "item item-input">
                     <span class = "input-label">Usuario</span>
-                    <input type = "text" ng-model = "user" name = "username">
+                    <input type = "text" ng-model = "userVerify.username">
                 </label>
+                {{ userVerify.username }}
                 <label class = "item item-input">
                     <span class = "input-label">Contraseña</span>
-                    <input type = "password" ng-model = "password" name = "password">
+                    <input type = "password" ng-model = "userVerify.password">
                 </label>
+                {{ userVerify.password }}
             </ion-list>
             <div class = "spacer" style = "height: 40px;"></div>
             <a ng-click = "verify()" class = "button button-assertive button-block">Ingresa</a>

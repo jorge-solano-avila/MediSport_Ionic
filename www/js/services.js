@@ -20,7 +20,7 @@ angular.module( "MediSport" )
 
 .service( "DataBaseUser", function( $rootScope, $http, PopUps )
 {
-    $rootScope.users = [];
+    this.user = {};
 
     this.add = function( newUser )
     {
@@ -35,21 +35,28 @@ angular.module( "MediSport" )
     this.getAll = function()
     {
         console.log( "GET ALL" );
-        $http.get( "http://apimedisport.herokuapp.com/users" )
-        .success( function( data )
-        {
-            $rootScope.users = data;
-        } )
-        .error( function( err )
-        {
-            console.log( "Error get all" );
-            PopUps.connectionAlert();
-        } );
     };
 
-    this.get = function( username )
+    this.get = function( username, password )
     {
-
+        return $http.post( "http://localhost:8000/users",
+        {
+            username: username,
+            password: password
+        } );
+        /*
+        .success( function( data )
+        {
+            console.log( data );
+            if( data === "Error" )
+                PopUps.incorrectPassword();
+            else
+                return data;
+        } )
+        .error( function( error )
+        {
+            PopUps.newUser();
+        } );*/
     };
 } )
 
@@ -66,6 +73,20 @@ angular.module( "MediSport" )
         alertPopup.then( function( response )
         {
             console.log( "connection alert" );
+        } );
+    };
+
+    this.incorrectPassword = function()
+    {
+        var alertPopup = $ionicPopup.alert
+        ( {
+            title: "Contraseña incorrecta",
+            template: "Por favor revisa tu contraseña."
+        } );
+
+        alertPopup.then( function( response )
+        {
+            console.log( "incorrect password" );
         } );
     };
 
