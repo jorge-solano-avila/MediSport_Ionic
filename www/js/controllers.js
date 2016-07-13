@@ -62,8 +62,12 @@ angular.module( "MediSport" )
 
 } )
 
-.controller( "Map", function( $rootScope, $scope, PopUps )
+.controller( "Map", function( $rootScope, $scope, DataBaseCenter, PopUps )
 {
+    $scope.latitude = "";
+    $scope.longitude = "";
+    $scope.ubications = [];
+
     google.maps.event.addDomListener( window, "load", initialize() );
 
     function initialize()
@@ -83,9 +87,9 @@ angular.module( "MediSport" )
 
         navigator.geolocation.getCurrentPosition( function( pos )
         {
-            var latitude = pos.coords.latitude;
-            var longitude = pos.coords.longitude;
-            var position = new google.maps.LatLng( latitude, longitude );
+            $scope.latitud = pos.coords.latitude;
+            $scope.longitude = pos.coords.longitude;
+            var position = new google.maps.LatLng( $scope.latitud, $scope.longitude );
             map.setCenter( position );
             var myLocation = new google.maps.Marker(
             {
@@ -96,7 +100,32 @@ angular.module( "MediSport" )
         } );
 
         $scope.map = map;
-    }
+    };
+
+    $scope.find = function()
+    {
+        console.log( "FIND" );
+        DataBaseCenter.getAll()
+        .then( function( response )
+        {
+            $scope.ubications = response.data;
+            console.log( $scope.ubications );
+            for( var i in $scope.ubications )
+            {
+                console.log( $scope.ubications[i].latitude );
+                var position = new google.maps.LatLng( $scope.ubications[i].latitude, $scope.ubications[i].longitude );
+                var location = new google.maps.Marker(
+                {
+                    position: position,
+                    map: $scope.map,
+                    title: "Location"
+                } );
+            }
+        }, function( error )
+        {
+            console.log( "Errores en marcadores" );
+        } );
+    };
 } )
 
 .controller( "Search", function( $scope, PopUps )

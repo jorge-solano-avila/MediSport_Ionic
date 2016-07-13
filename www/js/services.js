@@ -1,7 +1,9 @@
 angular.module( "MediSport" )
 
-.service( "DataBaseCenter", function()
+.service( "DataBaseCenter", function( $http )
 {
+    this.server = "http://apimedisport.herokuapp.com";
+
     this.add = function( newCenter )
     {
 
@@ -14,7 +16,7 @@ angular.module( "MediSport" )
 
     this.getAll = function()
     {
-
+        return $http.get( this.server + "/centers" );
     };
 } )
 
