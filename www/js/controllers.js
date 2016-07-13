@@ -1,87 +1,30 @@
 angular.module( "MediSport" )
 
-.service( "DataBaseUser", function( $rootScope )
+.controller( "LogIn", function( $rootScope, $scope, DataBaseUser, PopUps )
 {
     $rootScope.user = {};
-
-    this.add = function( newUser )
-    {
-        var user = new User( newUser );
-
-        user.save( function( error )
-        {
-            if( error )
-            {
-                /*
-                console.log( typeof error );
-                console.log( Object.toType( error ) );
-                console.log( error );
-                var alertPopup = $ionicPopup.alert
-                ( {
-                    title: "Datos incompletos",
-                    template: "Por favor ingresa todos los campos requeridos"
-                } );
-
-                alertPopup.then( function( res )
-                {
-                    console.log( "Confirmation alert" );
-                } );*/
-            }
-        } );
-    };
-
-    this.delete = function( id )
-    {
-
-    };
-
-    this.getAll = function()
-    {
-
-    };
-
-    this.get = function( username )
-    {
-        console.log( "GET" );
-        User.findOne( { "username": username }, "name", function( error, user )
-        {
-            if( error )
-                console.log( error );
-            console.log( user.name );
-        } );
-    };
-} )
-
-.controller( "LogIn", function( $rootScope, $scope, DataBaseUser )
-{
-    $rootScope.user = "";
-    $rootScope.password = "";
+    $scope.username = "";
+    $scope.password = "";
 
     $scope.verify = function()
     {
         console.log( "VERIFIY" );
-        DataBaseUser.get( user );
+        DataBaseUser.getAll();
+        //$rootScope.user = DataBaseUser.get( $scope.username );
     };
 } )
 
-.controller( "SignUp", function( $scope )
-{
-    $rootScope.name = "";
-    $rootScope.user = "";
-    $rootScope.password = "";
-
-    $scope.verify = function()
-    {
-
-    };
-} )
-
-.controller( "Menu", function( $scope )
+.controller( "SignUp", function( $scope, PopUps )
 {
 
 } )
 
-.controller( "Map", function( $rootScope, $scope )
+.controller( "Menu", function( $scope, PopUps )
+{
+
+} )
+
+.controller( "Map", function( $rootScope, $scope, PopUps )
 {
     google.maps.event.addDomListener( window, "load", initialize() );
 
@@ -118,12 +61,12 @@ angular.module( "MediSport" )
     }
 } )
 
-.controller( "Search", function( $scope )
+.controller( "Search", function( $scope, PopUps )
 {
 
 } )
 
-.controller( "Account", function( $scope )
+.controller( "Account", function( $scope, PopUps )
 {
 
 } );
