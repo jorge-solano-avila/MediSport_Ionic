@@ -71,9 +71,9 @@ angular.module( "MediSport" )
     $scope.latitude = "";
     $scope.longitude = "";
     $scope.ubications = [];
-    $scope.icon = new google.maps.MarkerImage( "../img/marker.png", null, null,
+    $scope.icon = new google.maps.MarkerImage( "img/marker.png", null, null,
         null, new google.maps.Size( 32, 32 ) );
-    $scope.iconUbication = new google.maps.MarkerImage( "../img/ubication.png", null, null,
+    $scope.iconUbication = new google.maps.MarkerImage( "img/ubication.png", null, null,
         null, new google.maps.Size( 32, 32 ) );
 
     google.maps.event.addDomListener( window, "load", initMap() );
@@ -114,7 +114,7 @@ angular.module( "MediSport" )
         } );
     }
 
-    function addMarker( location, flag )
+    function addMarker( location )
     {
         var marker = new google.maps.Marker
         ( {
@@ -123,8 +123,7 @@ angular.module( "MediSport" )
             icon: $scope.icon
         } );
 
-        if( flag )
-            $scope.markers.push( marker );
+        $scope.markers.push( marker );
     }
 
     function addMarkerUbication( location )
@@ -174,7 +173,7 @@ angular.module( "MediSport" )
                     lng: $scope.ubications[i].longitude
                 };
 
-                addMarker( position, true );
+                addMarker( position );
             }
         }, function( error )
         {
