@@ -147,12 +147,12 @@ angular.module( "MediSport" )
         } );
     };
 
-    this.welcome = function()
+    this.welcome = function( name )
     {
         var alertPopup = $ionicPopup.alert
         ( {
             title: "Bienvenido",
-            template: "Bienvenido a MediSport."
+            template: "Bienvenido a MediSport " + String( name ) + "."
         } );
 
         alertPopup.then( function( response )

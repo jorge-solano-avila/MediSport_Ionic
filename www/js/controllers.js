@@ -34,15 +34,19 @@ angular.module( "MediSport" )
                 {
                     $rootScope.user = response.data;
                     $ionicLoading.hide();
-                    PopUps.welcome();
+                    PopUps.welcome( $rootScope.user.name );
                     $state.go( "menu.searchGPS" );
                 }
                 $scope.userVerify = {};
+                $scope.userVerify.username = "";
+                $scope.userVerify.password = "";
             }, function( error )
             {
                 $ionicLoading.hide();
                 PopUps.newUser();
                 $scope.userVerify = {};
+                $scope.userVerify.username = "";
+                $scope.userVerify.password = "";
             } );
         }
     };
@@ -55,7 +59,6 @@ angular.module( "MediSport" )
     $scope.addUser = function()
     {
         $ionicLoading.show();
-        $rootScope.user = $scope.userVerify;
         if( $scope.userVerify.password === $scope.userVerify.passwordAux )
         {
             DataBaseUser.add
@@ -67,9 +70,10 @@ angular.module( "MediSport" )
             .then( function( response )
             {
                 $ionicLoading.hide();
-                if( response === "Save" )
+                if( response.data === "Save" )
                 {
-                    PopUps.welcome();
+                    $rootScope.user = $scope.userVerify;
+                    PopUps.welcome( $scope.userVerify.name );
                     $scope.userVerify = {};
                 }
                 else
