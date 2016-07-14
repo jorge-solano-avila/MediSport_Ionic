@@ -1,27 +1,37 @@
 angular.module( "MediSport" )
 
-.controller( "LogIn", function( $rootScope, $scope, $state, DataBaseUser, PopUps )
+.controller( "LogIn", function( $rootScope, $scope, $state, $ionicLoading, DataBaseUser, PopUps )
 {
     $scope.userVerify = {};
     $rootScope.user = {};
 
     $scope.verify = function()
     {
+        $ionicLoading.show();
         DataBaseUser.get( $scope.userVerify.username, $scope.userVerify.password )
         .then( function( response )
         {
             if( response.data === "Password incorrect" )
+            {
+                $ionicLoading.hide();
                 PopUps.incorrectPassword();
+            }
             else if( response.data === "Username incorrect" )
+            {
+                $ionicLoading.hide();
                 PopUps.newUser();
+            }
             else
             {
                 $rootScope.user = response.data;
+                $ionicLoading.hide();
+                PopUps.welcome();
                 $state.go( "menu.searchGPS" );
             }
             $scope.userVerify = {};
         }, function( error )
         {
+            $ionicLoading.hide();
             PopUps.newUser();
             $scope.userVerify = {};
         } );
@@ -62,7 +72,7 @@ angular.module( "MediSport" )
 
 } )
 
-.controller( "Map", function( $rootScope, $scope, DataBaseCenter, PopUps )
+.controller( "Map", function( $rootScope, $scope, $ionicLoading, DataBaseCenter, PopUps )
 {
     $scope.map;
     $scope.markers = [];
@@ -160,10 +170,12 @@ angular.module( "MediSport" )
 
     $scope.find = function()
     {
+        $ionicLoading.show();
         deleteMarkers();
         DataBaseCenter.getNearby( $scope.latitude, $scope.longitude, $scope.search.value )
         .then( function( response )
         {
+            $ionicLoading.hide();
             $scope.ubications = response.data;
             for( var i in $scope.ubications )
             {
@@ -177,6 +189,7 @@ angular.module( "MediSport" )
             }
         }, function( error )
         {
+            $ionicLoading.hide();
             console.log( "Errores en marcadores" );
         } );
     };
