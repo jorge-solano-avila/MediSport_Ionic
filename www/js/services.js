@@ -147,6 +147,20 @@ angular.module( "MediSport" )
         } );
     };
 
+    this.userExist = function()
+    {
+        var alertPopup = $ionicPopup.alert
+        ( {
+            title: "El usuario ya existe",
+            template: "Por favor cambie el usuario."
+        } );
+
+        alertPopup.then( function( response )
+        {
+            console.log( "Exist user" );
+        } );
+    };
+
     this.welcome = function( name )
     {
         var alertPopup = $ionicPopup.alert

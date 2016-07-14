@@ -70,10 +70,14 @@ angular.module( "MediSport" )
             .then( function( response )
             {
                 $ionicLoading.hide();
-                if( response.data === "Save" )
+                if( response.data === "Username in use" )
                 {
-                    $rootScope.user = $scope.userVerify;
-                    PopUps.welcome( $scope.userVerify.name );
+                    PopUps.userExist();
+                }
+                else if( response.data.username === $scope.userVerify.username )
+                {
+                    $rootScope.user = response.data;
+                    PopUps.welcome( $rootScope.user.name );
                     $scope.userVerify = {};
                 }
                 else
