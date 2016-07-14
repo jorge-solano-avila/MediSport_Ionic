@@ -58,19 +58,6 @@ angular.module( "MediSport", ["ionic"] )
         }
     } )
 
-    .state( "menu.search",
-    {
-        url: "/search",
-        views:
-        {
-            "menuContent":
-            {
-                templateUrl: "templates/search.html",
-                controller: "Search"
-            }
-        }
-    } )
-
     .state( "menu.account",
     {
         url: "/account",

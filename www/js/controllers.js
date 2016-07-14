@@ -102,13 +102,14 @@ angular.module( "MediSport" )
     };
 } )
 
-.controller( "Menu", function( $scope, PopUps )
+.controller( "Menu", function( $scope, $rootScope, PopUps )
 {
 
 } )
 
-.controller( "Map", function( $rootScope, $scope, $ionicLoading, $ionicPlatform, DataBaseCenter, PopUps )
+.controller( "Map", function( $rootScope, $scope, $ionicLoading, $ionicPlatform, $ionicSideMenuDelegate, DataBaseCenter, PopUps )
 {
+    $ionicSideMenuDelegate.canDragContent( false )
     $ionicPlatform.registerBackButtonAction( function ()
     {
         if( true )
@@ -235,12 +236,12 @@ angular.module( "MediSport" )
     };
 } )
 
-.controller( "Search", function( $scope, PopUps )
+.controller( "Search", function( $scope, $rootScope, PopUps )
 {
 
 } )
 
-.controller( "Account", function( $scope, PopUps )
+.controller( "Account", function( $scope, $rootScope, PopUps )
 {
 
 } );
