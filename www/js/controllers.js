@@ -48,12 +48,13 @@ angular.module( "MediSport" )
     };
 } )
 
-.controller( "SignUp", function( $scope, $rootScope, $state, DataBaseUser, PopUps )
+.controller( "SignUp", function( $scope, $rootScope, $state, $ionicLoading, DataBaseUser, PopUps )
 {
     $scope.userVerify = {};
 
     $scope.addUser = function()
     {
+        $ionicLoading.show();
         $rootScope.user = $scope.userVerify;
         if( $scope.userVerify.password === $scope.userVerify.passwordAux )
         {
@@ -65,15 +66,31 @@ angular.module( "MediSport" )
             } )
             .then( function( response )
             {
-                PopUps.welcome();
-                $scope.userVerify = {};
+                $ionicLoading.hide();
+                if( response === "Save" )
+                {
+                    PopUps.welcome();
+                    $scope.userVerify = {};
+                }
+                else
+                {
+                    for( var i in response.data.errors )
+                    {
+                        PopUps.newUserIncorrect( response.data.errors[i].message );
+                        break;
+                    }
+                }
             }, function( error )
             {
-                PopUps.newUserIncorrect();
+                $ionicLoading.hide();
+                PopUps.connectionAlert();
             } );
         }
         else
+        {
+            $ionicLoading.hide();
             PopUps.incorrectNewPassword();
+        }
     };
 } )
 

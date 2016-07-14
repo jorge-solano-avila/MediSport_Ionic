@@ -48,7 +48,6 @@ angular.module( "MediSport" )
 
     this.getAll = function()
     {
-        console.log( "GET ALL" );
     };
 
     this.get = function( username, password )
@@ -120,12 +119,12 @@ angular.module( "MediSport" )
         } );
     };
 
-    this.newUserIncorrect = function()
+    this.newUserIncorrect = function( message )
     {
         var alertPopup = $ionicPopup.alert
         ( {
             title: "Datos incorrectos",
-            template: "Por favor revisa los datos ingresados."
+            template: message
         } );
 
         alertPopup.then( function( response )

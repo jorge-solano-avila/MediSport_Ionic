@@ -1,25 +1,25 @@
 <ion-view title = "Registro" ng-controller = "SignUp">
-    <ion-content padding = "true" class = "has-header">
-        <form id = "signup-form2" class = "list ">
-            <ion-list id = "signup-list2">
+    <ion-content padding = "true" class = "has-header" style = "background: url( img/login.jpg ) center; background-size: cover;">
+        <form class = "list ">
+            <ion-list>
                 <label class = "item item-input">
-                    <span class = "input-label">Nombre</span>
-                    <input type = "text" ng-model = "userVerify.name">
+                    <i class = "icon ion-android-person placeholder-icon"></i>
+                    <input type = "text" placeholder = "Nombre" ng-model = "userVerify.name">
                 </label>
                 <label class = "item item-input">
-                    <span class = "input-label">Usuario</span>
-                    <input type = "text" ng-model = "userVerify.username">
+                    <i class = "icon ion-person placeholder-icon"></i>
+                    <input type = "text" placeholder = "Usuario" ng-model = "userVerify.username">
                 </label>
                 <label class = "item item-input">
-                    <span class = "input-label">Contraseña</span>
-                    <input type = "password" ng-model = "userVerify.password">
+                    <i class = "icon ion-ios-locked placeholder-icon"></i>
+                    <input type = "password" placeholder = "Contraseña" ng-model = "userVerify.password">
                 </label>
                 <label class = "item item-input">
-                    <span class = "input-label">Repita la contraseña</span>
-                    <input type = "password" ng-model = "userVerify.passwordAux">
+                    <i class = "icon ion-ios-locked placeholder-icon"></i>
+                    <input type = "password" placeholder = "Repita su contraseña" ng-model = "userVerify.passwordAux">
                 </label>
             </ion-list>
-            <button ng-click = "addUser()" class="button button-block button-positive">Regístrate</button>
+            <button ng-click = "addUser()" class="button ion-ios-unlocked-outline button-block button-positive">Regístrate</button>
         </form>
     </ion-content>
 </ion-view>
