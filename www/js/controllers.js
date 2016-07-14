@@ -107,8 +107,13 @@ angular.module( "MediSport" )
 
 } )
 
-.controller( "Map", function( $rootScope, $scope, $ionicLoading, DataBaseCenter, PopUps )
+.controller( "Map", function( $rootScope, $scope, $ionicLoading, $ionicPlatform, DataBaseCenter, PopUps )
 {
+    $ionicPlatform.registerBackButtonAction( function ()
+    {
+        if( true )
+            navigator.app.exitApp();
+    }, 100 );
     $scope.map;
     $scope.markers = [];
     $scope.search = {};
