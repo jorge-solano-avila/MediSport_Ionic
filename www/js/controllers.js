@@ -3,38 +3,48 @@ angular.module( "MediSport" )
 .controller( "LogIn", function( $rootScope, $scope, $state, $ionicLoading, DataBaseUser, PopUps )
 {
     $scope.userVerify = {};
+    $scope.userVerify.username = "";
+    $scope.userVerify.password = "";
     $rootScope.user = {};
 
     $scope.verify = function()
     {
         $ionicLoading.show();
-        DataBaseUser.get( $scope.userVerify.username, $scope.userVerify.password )
-        .then( function( response )
+        if( $scope.userVerify.username.length === 0 )
         {
-            if( response.data === "Password incorrect" )
+            $ionicLoading.hide();
+            PopUps.entryUser();
+        }
+        else
+        {
+            DataBaseUser.get( $scope.userVerify.username, $scope.userVerify.password )
+            .then( function( response )
             {
-                $ionicLoading.hide();
-                PopUps.incorrectPassword();
-            }
-            else if( response.data === "Username incorrect" )
+                if( response.data === "Password incorrect" )
+                {
+                    $ionicLoading.hide();
+                    PopUps.incorrectPassword();
+                }
+                else if( response.data === "Username incorrect" )
+                {
+                    $ionicLoading.hide();
+                    PopUps.newUser();
+                }
+                else
+                {
+                    $rootScope.user = response.data;
+                    $ionicLoading.hide();
+                    PopUps.welcome();
+                    $state.go( "menu.searchGPS" );
+                }
+                $scope.userVerify = {};
+            }, function( error )
             {
                 $ionicLoading.hide();
                 PopUps.newUser();
-            }
-            else
-            {
-                $rootScope.user = response.data;
-                $ionicLoading.hide();
-                PopUps.welcome();
-                $state.go( "menu.searchGPS" );
-            }
-            $scope.userVerify = {};
-        }, function( error )
-        {
-            $ionicLoading.hide();
-            PopUps.newUser();
-            $scope.userVerify = {};
-        } );
+                $scope.userVerify = {};
+            } );
+        }
     };
 } )
 

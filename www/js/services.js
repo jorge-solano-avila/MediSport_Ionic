@@ -130,7 +130,21 @@ angular.module( "MediSport" )
 
         alertPopup.then( function( response )
         {
-            console.log( "incorrect dates" );
+            console.log( "Incorrect dates" );
+        } );
+    };
+
+    this.entryUser = function()
+    {
+        var alertPopup = $ionicPopup.alert
+        ( {
+            title: "Ingrese un usuario",
+            template: "El campo usuario se encuentra vacío."
+        } );
+
+        alertPopup.then( function( response )
+        {
+            console.log( "Entry user" );
         } );
     };
 
