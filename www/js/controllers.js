@@ -161,17 +161,24 @@ angular.module( "MediSport" )
             addMarkerUbication( location );
         }, function( error )
         {
+            PopUps.ubicationFailed();
             console.log( "Error obteniendo ubicación" );
         } );
     }
 
-    function addMarker( location )
+    function addMarker( location, infoWindow )
     {
         var marker = new google.maps.Marker
         ( {
             position: location,
             map: $scope.map,
+            animation: google.maps.Animation.DROP,
             icon: $scope.icon
+        } );
+
+        marker.addListener( "click", function()
+        {
+            infoWindow.open( $scope.map, marker );
         } );
 
         $scope.markers.push( marker );
@@ -183,7 +190,20 @@ angular.module( "MediSport" )
         ( {
             position: location,
             map: $scope.map,
+            animation: google.maps.Animation.DROP,
             icon: $scope.iconUbication
+        } );
+
+        var contentString = '<div id = "content">' + '<div>' + '<h4>Tu ubicación</h4>' + '</div>' + '</div>';
+
+        var infoWindow = new google.maps.InfoWindow
+        ( {
+            content: contentString
+        } );
+
+        marker.addListener( "click", function()
+        {
+            infoWindow.open( $scope.map, marker );
         } );
     }
 
@@ -226,12 +246,30 @@ angular.module( "MediSport" )
                     lng: $scope.ubications[i].longitude
                 };
 
-                addMarker( position );
+                var contentString = "";
+                if( $scope.ubications[i].telephones[0] === undefined )
+                    contentString = '<div id = "content">' + '<div>' + '<h4>'
+                        + $scope.ubications[i].name + '</h4>' + '<div id = "bodyContent">'
+                        + $scope.ubications[i].address + '<br>' + $scope.ubications[i].location
+                        + '</div>' + '</div>' + '</div>';
+                else
+                    contentString = '<div id = "content">' + '<div>' + '<h4>'
+                        + $scope.ubications[i].name + '</h4>' + '<div id = "bodyContent">'
+                        + $scope.ubications[i].address + '<br>' + $scope.ubications[i].location
+                        + '<br>' + '<strong>' + String( $scope.ubications[i].telephones[0] )
+                        + '</strong>' + '</div>' + '</div>' + '</div>';
+
+                var infoWindow = new google.maps.InfoWindow
+                ( {
+                    content: contentString
+                } );
+
+                addMarker( position, infoWindow );
             }
         }, function( error )
         {
             $ionicLoading.hide();
-            console.log( "Errores en marcadores" );
+            PopUps.connectionAlert();
         } );
     };
 } )

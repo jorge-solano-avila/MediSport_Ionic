@@ -174,4 +174,18 @@ angular.module( "MediSport" )
             $state.go( "menu.searchGPS" );
         } );
     };
+
+    this.ubicationFailed = function()
+    {
+        var alertPopup = $ionicPopup.alert
+        ( {
+            title: "Error de ubicación",
+            template: "No es posible obtener su ubicación."
+        } );
+
+        alertPopup.then( function( response )
+        {
+            console.log( "Ubication error" );
+        } );
+    };
 } );
