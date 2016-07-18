@@ -133,8 +133,8 @@ angular.module( "MediSport" )
     {
         var position =
         {
-            lat: 4.595402,
-            lng: -74.129665
+            lat: 5.776887,
+            lng: -75.67779
         };
 
         $scope.map = new google.maps.Map( document.getElementById( "map" ),
@@ -157,6 +157,8 @@ angular.module( "MediSport" )
                 lat: $scope.latitude,
                 lng: $scope.longitude
             };
+
+            $scope.map.setCenter( location );
 
             addMarkerUbication( location );
         }, function( error )
