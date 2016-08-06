@@ -29,8 +29,8 @@ ion-list.manual-list-fullwidth div.list > .item, .list.card.manual-card-fullwidt
 .map
 {
     border: 5px solid black;
-    margin: 0 auto;
     height: 70%;
+    margin: 0 auto;
     width: 90%;
 }
 
